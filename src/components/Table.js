@@ -1,13 +1,18 @@
+import { useContext } from "react";
 import Order from "./Order";
+import orderContext from "../context/orderContext";
 
 function Table(props) {
+
+    const c = useContext(orderContext);
+
     return (
         <>
         <h3>Table {props.id}</h3>
         <ul>
-            {props.orders.filter(o => o.table === props.id).map(o => {
+            {c.orders.filter(o => o.table === props.id).map(o => {
                 return (
-                    <Order order={o} key={o.id} id={o.id}/>
+                    <Order order={o} key={o.id} />
                 );
             })}
         </ul>

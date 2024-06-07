@@ -1,9 +1,17 @@
+import { useContext } from "react";
+import orderContext from "../context/orderContext";
+
 function Order(props) {
 
-    const { menu, price } = props.order;
+    const c = useContext(orderContext);
+
+    const { id, menu, price } = props.order;
 
     const deleteOrder = e => {
-        
+        c.setOrder(prevState => {
+            const arr = prevState;
+            return arr.filter(o => o.id !== id);
+        });
     }
 
     return (

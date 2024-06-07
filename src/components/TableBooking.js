@@ -23,7 +23,7 @@ const reducerForm = (state, action) => {
 
 
 
-function TableBooking(props) {
+function TableBooking() {
 
 
     const c = useContext(orderContext)
@@ -99,6 +99,7 @@ function TableBooking(props) {
             value={formState.table} 
             onChange={changeHandler('table')}
             >
+                <option value=''></option>
                 <option value='1'>Table 1</option>
                 <option value='2'>Table 2</option>
                 <option value='3'>Table 3</option>
