@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import TableBooking from './components/TableBooking';
+import List from './components/List';
+import { OrderContextProvider } from './context/orderContext'
+
+const initialOrders = JSON.parse(localStorage.getItem('order-data')) || [];
 
 function App() {
+  
+  const [orderState, setOrderState] = useState(initialOrders);
+
+  useEffect(() => {
+    localStorage.setItem('order-data', JSON.stringify(orderState));
+  }, [orderState]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <h1>Restaurant Table Booking</h1>
+    <OrderContextProvider>
+      <TableBooking onBooking={setOrderState} />
+      <List orders={orderState} />
+    </OrderContextProvider>
+    </>
   );
 }
 
